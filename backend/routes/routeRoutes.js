@@ -1,10 +1,11 @@
-const express=require("express");
+const express = require("express");
 
-const router=express.Router();
+const router = express.Router();
 
 
 const {
-    shortestRoute
+    shortestRoute,
+    multiRoute
 }=require("../controllers/routeController");
 
 
@@ -16,4 +17,11 @@ shortestRoute
 
 
 
-module.exports=router;
+router.post(
+"/multi",
+multiRoute
+);
+
+
+
+module.exports = router;

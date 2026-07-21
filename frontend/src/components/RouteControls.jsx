@@ -62,16 +62,69 @@ function RouteControls({ setRoute })  {
       </button>
 
       {routeInfo && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Distance: {routeInfo.distance} km</h3>
 
-          <p>
-            Route: {routeInfo .path.join(" → ")}
-          </p>
-        </div>
+      <div style={{
+      marginTop:"20px",
+      padding:"15px",
+      border:"1px solid #ddd",
+      borderRadius:"10px",
+      background:"#f8fafc"
+      }}>
+
+      <h3>
+
+      Distance: {routeInfo.distance} km
+
+      </h3>
+
+      <p>
+
+      Route:
+
+      {routeInfo.path.join(" → ")}
+
+      </p>
+
+      <hr/>
+
+      <h3>
+
+      Estimated Delivery Time
+
+      </h3>
+
+      <p>
+
+      🚗 Car :
+      {" "}
+      {Math.ceil(routeInfo.distance/40*60)}
+      mins
+
+      </p>
+
+      <p>
+
+      🏍 Bike :
+      {" "}
+      {Math.ceil(routeInfo.distance/25*60)}
+      mins
+
+      </p>
+
+      <p>
+
+      🚶 Walk :
+      {" "}
+      {Math.ceil(routeInfo.distance/5*60)}
+      mins
+
+      </p>
+
+      </div>
+
       )}
-    </div>
-  );
-}
+          </div>
+        );
+      }
 
 export default RouteControls;

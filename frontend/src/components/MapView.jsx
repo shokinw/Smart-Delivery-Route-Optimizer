@@ -10,21 +10,34 @@ import "leaflet/dist/leaflet.css";
 
 import { getLocations } from "../api/api";
 
-function MapView({ route }) {
+
+function MapView({ route, refresh }) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    async function loadLocations() {
-      try {
-        const res = await getLocations();
-        setLocations(res.data);
-      } catch (error) {
-        console.error("Error loading locations:", error);
-      }
+
+  async function loadLocations() {
+
+    try {
+
+      const res = await getLocations();
+
+      setLocations(res.data);
+
+    } 
+    catch(error) {
+
+      console.error(error);
+
     }
 
-    loadLocations();
-  }, []);
+  }
+
+
+  loadLocations();
+
+
+}, [refresh]);
 
   // Debug
   console.log("ROUTE FROM APP:", route);

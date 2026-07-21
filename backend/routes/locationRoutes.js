@@ -4,16 +4,20 @@ const router = express.Router();
 
 
 const {
-    addLocation,
-    getLocations
-}=require("../controllers/locationController");
+  addLocation,
+  getLocations,
+  deleteLocation,
+  updateLocation,
+} = require("../controllers/locationController");
 
 
 
-router.post("/",addLocation);
+router.post("/", addLocation);
 
+router.put("/:id", updateLocation);
+router.get("/", getLocations);
 
-router.get("/",getLocations);
+router.delete("/:id",deleteLocation);
 
 
 

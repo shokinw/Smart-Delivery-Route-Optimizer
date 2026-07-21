@@ -1,43 +1,106 @@
-import { useState } from "react";
+return (
+  <div
+    style={{
+      background: "#f5f7fb",
+      minHeight: "100vh",
+      fontFamily: "Arial"
+    }}
+  >
 
-import LocationList from "./components/LocationList";
-import RouteControls from "./components/RouteControls";
-import MapView from "./components/MapView";
+    <header
+      style={{
+        background: "#2563eb",
+        color: "white",
+        padding: "25px",
+        textAlign: "center",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.15)"
+      }}
+    >
+      <h1>🚚 Smart Delivery Route Optimizer</h1>
+      <p>DSA + AI Based Delivery Planning System</p>
+    </header>
 
-function App() {
-  const [route, setRoute] = useState(null);
+    <div
+      style={{
+        padding: "25px"
+      }}
+    >
 
-  return (
-    <div>
-      <header
-        style={{
-          background: "#2563eb",
-          color: "white",
-          padding: "20px",
-          textAlign: "center",
-        }}
-      >
-        <h1>🚚 Smart Delivery Route Optimizer</h1>
-        <p>DSA + AI Based Delivery Planning System</p>
-      </header>
+      <Dashboard
+        totalLocations={totalLocations}
+        route={route}
+      />
+
+      <br />
 
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "350px 1fr",
-          gap: "20px",
-          padding: "20px",
+          gap: "20px"
         }}
       >
+
         <div>
-          <LocationList />
-          <RouteControls setRoute={setRoute} />
+
+          <LocationList
+            refresh={refresh}
+            refreshLocations={refreshLocations}
+            setTotalLocations={setTotalLocations}
+          />
+
         </div>
 
-        <MapView route={route} />
-      </div>
-    </div>
-  );
-}
+        <div>
 
-export default App;
+          <MapView
+            route={route}
+            refresh={refresh}
+          />
+
+        </div>
+
+      </div>
+
+      <br />
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "20px"
+        }}
+      >
+
+        <RouteControls
+          setRoute={setRoute}
+        />
+
+        <MultiStopRoute
+          onOptimize={handleOptimization}
+        />
+
+      </div>
+
+      <br />
+
+      <AddLocation
+        refreshLocations={refreshLocations}
+      />
+
+      <br />
+
+      <AddDelivery
+        refreshDeliveries={refreshDeliveries}
+      />
+
+      <br />
+
+      <DeliveryList
+        refresh={deliveryRefresh}
+      />
+
+    </div>
+
+  </div>
+);

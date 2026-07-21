@@ -3,22 +3,35 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
-const routeRoutes=require("./routes/routeRoutes");
 
-
+const locationRoutes = require("./routes/locationRoutes");
+const routeRoutes = require("./routes/routeRoutes");
+const deliveryRoutes=require("./routes/deliveryRoutes");
+const seedRoutes = require("./routes/seedRoutes");
 const app = express();
 
 
-app.use(cors());
+// Middleware
 app.use(express.json());
-app.use("/api/routes",routeRoutes);
+app.use(cors());
 
 
-// MongoDB Connection
+// Routes
+app.use("/api/seed", seedRoutes);
+app.use("/api/locations", locationRoutes);
+app.use("/api/routes", routeRoutes);
+app.use(
+"/api/deliveries",
+deliveryRoutes
+);
+
+
+// MongoDB
 connectDB();
 
 
 
+// Test API
 app.get("/",(req,res)=>{
 
     res.json({
@@ -32,12 +45,9 @@ app.get("/",(req,res)=>{
 const PORT = process.env.PORT || 5000;
 
 
+
 app.listen(PORT,()=>{
 
-console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 
 });
-const locationRoutes = require("./routes/locationRoutes");
-
-
-app.use("/api/locations",locationRoutes);
